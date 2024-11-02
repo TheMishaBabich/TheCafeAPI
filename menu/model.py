@@ -1,11 +1,11 @@
-from sqlalchemy import String, Integer, Column
-
+from sqlalchemy import Column, Integer, String, Float
 from db import Base
 
 
-class User(Base):
-    __tablename__ = 'users'
-    id = Column(Integer, primary_key=True)
-    name = Column(String)
-    email = Column(String, unique=True)
-    password = Column(String)
+class Dish(Base):
+    __tablename__ = 'dishes'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    category = Column(String)
+    title = Column(String)
+    description = Column(String)
+    price = Column(Float)

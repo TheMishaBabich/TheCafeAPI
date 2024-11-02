@@ -10,10 +10,6 @@ from .security import hash_password, verify_password
 from .utils import check_active_user, remove_cookie
 
 
-async def logout_user() -> dict:
-    return {"message": "Successfully logged out"}
-
-
 class UserService:
     def __init__(self, repository: UserRepository):
         self.repository = repository

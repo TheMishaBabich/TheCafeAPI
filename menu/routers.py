@@ -1,19 +1,35 @@
-from fastapi import APIRouter
+from typing import List
 
-from auth import schemas
+from fastapi import APIRouter, Request, Depends
 
-auth_router = APIRouter()
+from menu.dependencies import get_menu_service
+from menu.services import MenuService
+from . import Dish
+from .schemas import DishResponse
 
+menu_router = APIRouter()
 
-@auth_router.post("/register", response_model=schemas.User)
-async def auth_register():
-    return
+@menu_router.post("/add")
+async def add(
+        dish: DishResponse,
+        menu_services: MenuService = Depends(get_menu_service),
+):
+    menu_services.add_dish(dish)
 
-@auth_router.post("/login", response_model=schemas.User)
-async def auth_login():
-    return
+    return f"Dish add to category {dish.category} name {dish.title} description {dish.description} price {dish.price}"
 
-@auth_router.post("/logout", response_model=schemas.User)
-async def auth_logout():
-    return
+@menu_router.get("/categories/",response_model=List[DishResponse])
+async def get_categories(
+    category: str,
+    menu_services: MenuService = Depends(get_menu_service)
+) -> List[DishResponse]:
+    return menu_services.get_category(category)
 
+@menu_router.post("/delete/dish")
+async def delete_dish(
+        dish_title: str,
+        menu_services: MenuService = Depends(get_menu_service)
+        ):
+    dish = menu_services.delete_dish(dish_title)
+    if dish:
+        return menu_services.delete_dish(dish_title)

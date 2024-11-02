@@ -5,14 +5,16 @@ from starlette.middleware.cors import CORSMiddleware
 
 from auth.routers import auth_router
 from db import Base, engine
+from menu.routers import menu_router
 
 app = FastAPI(
     title="CafeAPI",
-    description="Pet-project, created for business",
+    description="Pet-project, created for cafe business",
     version="1.0.0"
 )
 
 app.include_router(auth_router, prefix="/auth", tags=["Auth"])
+app.include_router(menu_router, prefix="/menu", tags=["Menu"])
 
 origins = [
     "http://127.0.0.1:3157",
