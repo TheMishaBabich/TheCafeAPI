@@ -8,24 +8,21 @@ from db import Base, engine
 from menu.routers import menu_router
 
 app = FastAPI(
-    title="CafeAPI",
-    description="Pet-project, created for cafe business",
-    version="1.0.0"
+    title="The Cafe API",
+    description="API for cafe management",
+    version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc"
 )
 
 app.include_router(auth_router, prefix="/auth", tags=["Auth"])
 app.include_router(menu_router, prefix="/menu", tags=["Menu"])
 
-origins = [
-    "http://127.0.0.1:3157",
-    "http://localhost:3157",
-    "http://127.0.0.1:8000",
-    "http://localhost:8000"
-]
+
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
