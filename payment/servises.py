@@ -22,7 +22,7 @@ class MokePaymentService:
         random_number = random.random() * 100
 
         if random_number < 80:
-            return PaymentStatus.SUCCESS, "Payment successful"
+            return PaymentStatus.SUCCESS, "Payment successful!"
         elif random_number < 90:
             return PaymentStatus.INSUFFICIENT_FUNDS, "Insufficient funds on the card"
         else:
