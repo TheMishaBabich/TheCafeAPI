@@ -6,6 +6,7 @@ from starlette.middleware.cors import CORSMiddleware
 from auth.routers import auth_router
 from db import Base, engine
 from menu.routers import menu_router
+from order.router import order_router
 
 app = FastAPI(
     title="The Cafe API",
@@ -17,7 +18,7 @@ app = FastAPI(
 
 app.include_router(auth_router, prefix="/auth", tags=["Auth"])
 app.include_router(menu_router, prefix="/menu", tags=["Menu"])
-
+app.include_router(order_router, prefix="/order", tags=["Order"])
 
 
 app.add_middleware(

@@ -10,7 +10,7 @@ from .schemas import DishResponse
 menu_router = APIRouter()
 
 @menu_router.post("/add")
-async def add(
+async def add_dish(
         dish: DishResponse,
         menu_services: MenuService = Depends(get_menu_service),
 ):

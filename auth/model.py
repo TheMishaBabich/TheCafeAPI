@@ -13,4 +13,4 @@ class User(Base):
     email: so.Mapped[str]
     password: so.Mapped[str]
     created_date: so.Mapped[datetime] = so.mapped_column(DateTime(timezone=True), default=datetime.now)
-
+    role: so.Mapped[str] = so.mapped_column(default='guest')
