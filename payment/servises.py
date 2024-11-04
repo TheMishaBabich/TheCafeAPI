@@ -53,7 +53,7 @@ class MokePaymentService:
     ) -> PaymentResponse:
         payment = self.payments.get(payment_id)
         if not payment:
-            raise HTTPException(status_code=404, detail="Payment not found")
+            raise HTTPException(status_code=404, detail="Payment not found!")
 
         is_valid, error_message = validate_card_data(card_data)
         if not is_valid:
